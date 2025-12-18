@@ -2,6 +2,11 @@ package com.ebc.notificaciones
 
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import androidx.annotation.DrawableRes
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Face
 import androidx.core.app.NotificationCompat
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -70,5 +75,35 @@ class NotificationService(private val context: Context) {
         )
 
     }
+
+    fun showImageNotificacion() {
+        val image = context.bitmapFromResource(R.drawable.emoji)
+
+        val notification =
+            NotificationCompat.Builder(context, "321")
+                .setContentTitle("Noti imagen")
+                .setContentText("Notificación de imagen")
+                .setSmallIcon(R.drawable.noti)
+                .setPriority(NotificationManager.IMPORTANCE_HIGH)
+                .setLargeIcon(image)
+                .setStyle(
+                    NotificationCompat.BigPictureStyle()
+                        .bigPicture(image)
+                        .bigLargeIcon(null as Bitmap?)
+                )
+                .setAutoCancel(true)
+                .build()
+        notificationManager.notify(
+            Random.nextInt(),
+            notification
+        )
+    }
+
+    private fun Context.bitmapFromResource(
+        @DrawableRes resId: Int
+    ) = BitmapFactory.decodeResource(
+        resources,
+        resId
+    )
 
 }
