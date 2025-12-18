@@ -99,6 +99,7 @@ fun NotificationView(modifier: Modifier = Modifier) {
         ) {
             Text("Notificación Inbox")
         }
+        Text("¡Fin de los Botones!")
     }
 }
 
